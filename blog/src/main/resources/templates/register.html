@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Personal Web 登录</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" type="image/x-ico" href="../static/images/favico.ico" />
+    <title>Personal Web 注册</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/main.css">
@@ -15,63 +19,166 @@
     <![endif]-->
     <!--<script type='text/javascript' src='../static/js/jquery.particleground.js'></script>-->
     <!--<script type='text/javascript' src='../static/js/demo.js'></script>-->
-    <!--<link rel="stylesheet" href="../static/css/style.css" />-->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/util.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/mains.css">
+    <link rel="stylesheet" href="../static/css/style.css" />
 
+    <link href="../static/css/signin.css" rel="stylesheet">
+    <link href="../static/css/register.css" rel="stylesheet">
 </head>
 <body>
-<!--<div id="particles">-->
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                <form class="login100-form validate-form">
-                    <span class="login100-form-title p-b-49">注册</span>
+<div class="container">
 
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
-                        <span class="label-input100">用户名</span>
-                        <input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
-                        <span class="focus-input100" data-symbol="&#xf206;"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="请输入密码">
-                        <span class="label-input100">密码</span>
-                        <input class="input100" type="password" name="password" placeholder="请输入密码">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="请再次输入密码">
-                        <span class="label-input100">确定密码</span>
-                        <input class="input100" type="password" name="repassword" placeholder="请再次输入密码">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="请输入手机号">
-                        <span class="label-input100">手机号</span>
-                        <input class="input100" type="text" name="phone" placeholder="请输入手机号">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
-                    <div class="text-right p-t-8 p-b-31">
-                        <a href="#" th:href="@{~/login}">已有帐号？登录~</a>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">注册</button>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
+    <form th:action="@{/register}" method="post" class="form-signin" id="registerForm">
+        <h2 class="form-signin-heading">注册</h2>
+        <div class="form-group has-feedback">
+            <label for="username" class="sr-only">用户名</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名" required>
         </div>
-    </div>
-<!--</div>-->
-<script src="../static/js/jquery.js"></script>
-<script src="../static/js/main.js"></script>
+        <div class="form-group has-feedback">
+            <label for="password" class="sr-only">密码</label>
+            <input type="password" id="password" class="form-control" name="password" placeholder="请输入密码" required>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="password" class="sr-only">确定密码</label>
+            <input type="password" id="repassword" class="form-control" name="repassword" placeholder="请再次输入密码" required>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="password" class="sr-only">手机号</label>
+            <input type="password" id="phone" class="form-control" name="phone" placeholder="请输入手机号" required>
+        </div>
+        <div class="checkbox remember">
+            <span>已有账号？<a href="javascript:" th:href="@{~/toLogin}">登录</a></span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="registerBtn">注 册</button>
+    </form>
+
+</div> <!-- /container -->
+
+
+<script src="../static/js/jquery.min.2.1.1.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/bootstrapValidator.min.js"></script>
+<script>
+    $(function () {
+        $('#registerForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '用户名长度必须在6到18位之间'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '用户名只能包含大写、小写、数字和下划线'
+                        }
+                    }
+                },
+                password: {
+                    message: '密码验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '密码长度必须在6到18位之间'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '密码只能包含大写、小写、数字和下划线'
+                        },
+                        different: {//不能和用户名相同
+                            field: 'username',
+                            message: '不能和用户名相同'
+                        }
+                    }
+                },
+                repassword: {
+                    message: '密码验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '密码长度必须在6到18位之间'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '密码只能包含大写、小写、数字和下划线'
+                        },
+                        identical: {//相同
+                            field: 'password',
+                            message: '两次密码不一致'
+                        },
+                        different: {//不能和用户名相同
+                            field: 'username',
+                            message: '不能和用户名相同'
+                        }
+                    }
+                },
+                phone: {
+                    message: '手机验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '手机不能为空'
+                        },
+                        stringLength: {
+                            min: 11,
+                            max: 11,
+                            message: '手机长度必须为11位'
+                        },
+                        regexp: {
+                            regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                            message: '请输入正确的手机号码'
+                        },
+                        different: {//不能和用户名相同
+                            field: 'username' + 'password',
+                            message: '不能和用户名相同'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.bv', function (e) {//点击提交之后
+            console.log("1");
+            // 终止重复提交
+            e.preventDefault();
+            // 得到form表单对象
+            var $form = $(e.target);
+            // 获得bootstrap验证对象
+            var bv = $form.data('bootstrapValidator');
+            console.log("2");
+            // Use Ajax to submit form data 提交至form标签中的action，result自定义
+            $.post($form.attr('action'), $form.serialize(), function (data) {
+                console.log("3"+data);
+                if (data.status == 200) {
+                    //注册成功跳转到登录页面
+                    //TODO 精美的弹出框
+                    alert("注册成功！");
+                    console.log("44");
+                    window.location.href='/toLogin';
+                } else if (data.status == 300) {
+                    console.log("4");
+                    $("#registerBtn").removeAttr("disabled");
+                    alert(data.msg);
+                }
+            })
+        });
+    });
+</script>
 </body>
 </html>

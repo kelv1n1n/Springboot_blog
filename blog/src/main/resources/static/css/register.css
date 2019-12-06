@@ -1,0 +1,28 @@
+a{
+    text-decoration: none;
+    list-style: none;
+}
+a:link{text-decoration:none; }  /* 指正常的未被访问过的链接*/
+
+a:visited{text-decoration:none; }/*指已经访问过的链接*/
+
+a:hover{text-decoration:none;}/*指鼠标在链接*/
+
+a:active{text-decoration:none;}/* 指正在点的链接*/
+
+.remember{
+    padding: 0 1px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.register{
+    text-align: center;
+    margin-top: 12px;
+}
+
+h2{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}

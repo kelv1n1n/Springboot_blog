@@ -31,18 +31,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="blink" class="navbar-brand" href="/" th:href="@{~/}" style="margin-left: 0">Program Life</a>
+                    <a id="blink" class="navbar-brand" href="/" th:href="@{~/toMain}" style="margin-left: 0">Program Life</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class=""><a href="/users" th:href="@{~/user}">首页</a></li>
+                        <li class=""><a href="/users" th:href="@{~/toMain}">首页</a></li>
                         <li class=""><a href="#">Java</a></li>
                         <li class=""><a href="#">分类</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class=""><a href="#" th:href="@{~/login}">登录</a></li>
-                        <li class=""><a href="#" th:href="@{~/register}">注册</a></li>
+
+                        <li class="" th:if="${session.result != null}"><a href="javascript:" th:text="${session.result.data.username}"></a></li>
+                        <li th:if="${session.result != null}"><a href="javascript:" th:href="@{~/quit}">退出</a></li>
+
+                        <li class="" th:unless="${session.result != null}"><a href="#" th:href="@{~/toLogin}">登录/注册</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

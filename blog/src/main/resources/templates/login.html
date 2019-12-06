@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" type="image/x-ico" href="../static/images/favico.ico" />
     <title>Personal Web 登录</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,54 +19,117 @@
     <![endif]-->
     <!--<script type='text/javascript' src='../static/js/jquery.particleground.js'></script>-->
     <!--<script type='text/javascript' src='../static/js/demo.js'></script>-->
-    <!--<link rel="stylesheet" href="../static/css/style.css" />-->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/util.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/mains.css">
+    <link rel="stylesheet" href="../static/css/style.css" />
+
+    <link href="../static/css/signin.css" rel="stylesheet">
+    <link href="../static/css/register.css" rel="stylesheet">
 
 </head>
 <body>
-<!--<div id="particles">-->
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                <form class="login100-form validate-form">
-                    <span class="login100-form-title p-b-49">登录</span>
 
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
-                        <span class="label-input100">用户名</span>
-                        <input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
-                        <span class="focus-input100" data-symbol="&#xf206;"></span>
-                    </div>
+<div class="container">
 
-                    <div class="wrap-input100 validate-input" data-validate="请输入密码">
-                        <span class="label-input100">密码</span>
-                        <input class="input100" type="password" name="pass" placeholder="请输入密码">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
-                    <div class="text-right p-t-8 p-b-31">
-                        <a href="javascript:" th:href="@{~/forget}">忘记密码？</a>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">登 录</button>
-                        </div>
-                    </div>
-
-                    <div class="flex-col-c p-t-25">
-                        <a href="javascript:" th:href="@{~/register}" class="txt2">立即注册</a>
-                    </div>
-                </form>
-            </div>
+    <form th:action="@{/login}" method="post" class="form-signin" id="loginForm">
+        <h2 class="form-signin-heading">登录</h2>
+        <div class="form-group has-feedback">
+            <label for="username" class="sr-only">用户名</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名" required>
         </div>
-    </div>
-<!--</div>-->
-<script src="../static/js/jquery.js"></script>
-<script src="../static/js/main.js"></script>
+        <div class="form-group has-feedback">
+        <label for="password" class="sr-only">密码</label>
+        <input type="password" id="password" class="form-control" name="password" placeholder="请输入密码" required>
+        </div>
+        <div class="checkbox remember">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住我
+            </label>
+            <span><a href="javascript:" th:href="@{~/toForget}">忘记密码</a></span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="loginBtn">登 录</button>
+        <div class="register"><a href="javascript:" th:href="@{~/toRegister}">注册</a></div>
+    </form>
+
+</div> <!-- /container -->
+
+
+<script src="../static/js/jquery.min.2.1.1.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/bootstrapValidator.min.js"></script>
+<script>
+    $(function () {
+        $('#loginForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '用户名长度必须在6到18位之间'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '用户名只能包含大写、小写、数字和下划线'
+                        }
+                    }
+                },
+                password: {
+                    message: '密码验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '密码长度必须在6到18位之间'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '密码只能包含大写、小写、数字和下划线'
+                        },
+                        different: {//不能和用户名相同
+                            field: 'username',
+                            message: '不能和用户名相同'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.bv', function (e) {//点击提交之后
+            console.log("1");
+            // 终止重复提交
+            e.preventDefault();
+            // 得到form表单对象
+            var $form = $(e.target);
+            // 获得bootstrap验证对象
+            var bv = $form.data('bootstrapValidator');
+            console.log("2");
+            // Use Ajax to submit form data 提交至form标签中的action，result自定义
+            $.post($form.attr('action'), $form.serialize(), function (data) {
+                console.log("3");
+                if (data == 200) {
+                    //跳转到主页面
+                    window.location.href='/main';
+                } else if (data == 300) {
+                    console.log("4");
+                    $("#loginBtn").removeAttr("disabled");
+                    alert("用户名或密码错误！");
+                }
+
+            })
+        });
+    });
+</script>
+
 </body>
 </html>
