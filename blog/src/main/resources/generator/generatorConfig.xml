@@ -44,7 +44,10 @@
         <!--<table tableName="user_test" domainObjectName="TestGenerator" enableCountByExample="true" enableUpdateByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
 
-        <table tableName="t_user" domainObjectName="BlogUser" enableCountByExample="true" enableUpdateByExample="true"
+<!--        <table tableName="tb_blog_user" domainObjectName="BlogUser" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
+
+        <table tableName="tb_blog" domainObjectName="Blog" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
 
     </context>
