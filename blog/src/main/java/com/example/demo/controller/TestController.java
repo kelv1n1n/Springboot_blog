@@ -37,7 +37,7 @@ public class TestController {
         return user;
     }
 
-    @RequestMapping(value = "/testsession",method = RequestMethod.POST)
+    @RequestMapping(value = "/testsession")
     @ResponseBody
     public HashMap testSession(){
         HashMap<String,String> hashMap = new HashMap<>();

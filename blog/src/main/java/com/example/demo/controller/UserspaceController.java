@@ -33,6 +33,7 @@ public class UserspaceController {
     public String login(BlogUser user, HttpSession session){
         PersonalResult result = blogUserService.login(user);
         session.setAttribute("result",result);
+        session.setAttribute("user",user.getId());
         return result.getStatus().toString();
     }
 

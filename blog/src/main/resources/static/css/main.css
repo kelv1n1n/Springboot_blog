@@ -1,3 +1,7 @@
+body{
+    background-color: #f1f1f1;
+}
+
 /*头部开始*/
 .header{
     position: fixed;
@@ -11,6 +15,7 @@
 }
 .navbar{
     background-color: #fff;
+    box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
 }
 .nav{
     padding-left: 30px;
@@ -19,6 +24,20 @@
     height: 100%;
     display: block;
     color: #9d9d9d;
+}
+.search-form{
+    margin-left: 86px;
+}
+.search-form button{
+    border: none;
+    padding: 0;
+    font-weight: normal;
+    color: #000000;
+}
+
+.search-form button:hover{
+    border: none;
+    background: transparent;
 }
 
 /*.navbar .nav>li:hover{*/
@@ -39,6 +58,7 @@
 /*正文部分开始*/
 .content{
     padding-top: 86px;
+    min-height: 100%;
 }
 .content .row{
     background-color: transparent;
@@ -189,8 +209,8 @@
     color: #999;
     font-size: 14px;
     padding-top: 2px;
-    left: 320px;
-    position: absolute;
+    /*left: 320px;*/
+    /*position: absolute;*/
 }
 /*文章列表结束*/
 
@@ -289,9 +309,12 @@
 .footer{
     height: 54px;
     line-height: 54px;
-    background-color: #f1f1f1;
+    background-color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
 
 
-
-
+/*======================================================文章详情页======================================================*/

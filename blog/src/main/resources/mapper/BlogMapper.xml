@@ -78,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    blog_id, blog_title, blog_sub_url, blog_cover_image, blog_category_id, blog_category_name, 
+    blog_id, blog_title, blog_sub_url, blog_cover_image, blog_category_id, blog_category_name,
     blog_tags, blog_status, blog_views, enable_comment, is_deleted, create_time, update_time
   </sql>
   <sql id="Blob_Column_List" >
@@ -117,7 +117,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -135,15 +135,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Blog" >
-    insert into tb_blog (blog_id, blog_title, blog_sub_url, 
-      blog_cover_image, blog_category_id, blog_category_name, 
-      blog_tags, blog_status, blog_views, 
-      enable_comment, is_deleted, create_time, 
+    insert into tb_blog (blog_id, blog_title, blog_sub_url,
+      blog_cover_image, blog_category_id, blog_category_name,
+      blog_tags, blog_status, blog_views,
+      enable_comment, is_deleted, create_time,
       update_time, blog_content)
-    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogSubUrl,jdbcType=VARCHAR}, 
-      #{blogCoverImage,jdbcType=VARCHAR}, #{blogCategoryId,jdbcType=INTEGER}, #{blogCategoryName,jdbcType=VARCHAR}, 
-      #{blogTags,jdbcType=VARCHAR}, #{blogStatus,jdbcType=TINYINT}, #{blogViews,jdbcType=BIGINT}, 
-      #{enableComment,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogSubUrl,jdbcType=VARCHAR},
+      #{blogCoverImage,jdbcType=VARCHAR}, #{blogCategoryId,jdbcType=INTEGER}, #{blogCategoryName,jdbcType=VARCHAR},
+      #{blogTags,jdbcType=VARCHAR}, #{blogStatus,jdbcType=TINYINT}, #{blogViews,jdbcType=BIGINT},
+      #{enableComment,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{blogContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Blog" >
@@ -296,19 +296,19 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update tb_blog
     set blog_id = #{record.blogId,jdbcType=INTEGER},
-      blog_title = #{record.blogTitle,jdbcType=VARCHAR},
-      blog_sub_url = #{record.blogSubUrl,jdbcType=VARCHAR},
-      blog_cover_image = #{record.blogCoverImage,jdbcType=VARCHAR},
-      blog_category_id = #{record.blogCategoryId,jdbcType=INTEGER},
-      blog_category_name = #{record.blogCategoryName,jdbcType=VARCHAR},
-      blog_tags = #{record.blogTags,jdbcType=VARCHAR},
-      blog_status = #{record.blogStatus,jdbcType=TINYINT},
-      blog_views = #{record.blogViews,jdbcType=BIGINT},
-      enable_comment = #{record.enableComment,jdbcType=TINYINT},
-      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      blog_content = #{record.blogContent,jdbcType=LONGVARCHAR}
+    blog_title = #{record.blogTitle,jdbcType=VARCHAR},
+    blog_sub_url = #{record.blogSubUrl,jdbcType=VARCHAR},
+    blog_cover_image = #{record.blogCoverImage,jdbcType=VARCHAR},
+    blog_category_id = #{record.blogCategoryId,jdbcType=INTEGER},
+    blog_category_name = #{record.blogCategoryName,jdbcType=VARCHAR},
+    blog_tags = #{record.blogTags,jdbcType=VARCHAR},
+    blog_status = #{record.blogStatus,jdbcType=TINYINT},
+    blog_views = #{record.blogViews,jdbcType=BIGINT},
+    enable_comment = #{record.enableComment,jdbcType=TINYINT},
+    is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    blog_content = #{record.blogContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,18 +316,18 @@
   <update id="updateByExample" parameterType="map" >
     update tb_blog
     set blog_id = #{record.blogId,jdbcType=INTEGER},
-      blog_title = #{record.blogTitle,jdbcType=VARCHAR},
-      blog_sub_url = #{record.blogSubUrl,jdbcType=VARCHAR},
-      blog_cover_image = #{record.blogCoverImage,jdbcType=VARCHAR},
-      blog_category_id = #{record.blogCategoryId,jdbcType=INTEGER},
-      blog_category_name = #{record.blogCategoryName,jdbcType=VARCHAR},
-      blog_tags = #{record.blogTags,jdbcType=VARCHAR},
-      blog_status = #{record.blogStatus,jdbcType=TINYINT},
-      blog_views = #{record.blogViews,jdbcType=BIGINT},
-      enable_comment = #{record.enableComment,jdbcType=TINYINT},
-      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    blog_title = #{record.blogTitle,jdbcType=VARCHAR},
+    blog_sub_url = #{record.blogSubUrl,jdbcType=VARCHAR},
+    blog_cover_image = #{record.blogCoverImage,jdbcType=VARCHAR},
+    blog_category_id = #{record.blogCategoryId,jdbcType=INTEGER},
+    blog_category_name = #{record.blogCategoryName,jdbcType=VARCHAR},
+    blog_tags = #{record.blogTags,jdbcType=VARCHAR},
+    blog_status = #{record.blogStatus,jdbcType=TINYINT},
+    blog_views = #{record.blogViews,jdbcType=BIGINT},
+    enable_comment = #{record.enableComment,jdbcType=TINYINT},
+    is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

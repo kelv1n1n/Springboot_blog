@@ -12,7 +12,7 @@ public class AdminBlogController {
 
     @GetMapping("/blogs/edit")
     public String edit(HttpServletRequest request) {
-//        request.setAttribute("path", "edit");
+        request.setAttribute("path", "edit");
 //        request.setAttribute("categories", categoryService.getAllCategories());
         return "admin/edit";
     }

@@ -1,4 +1,5 @@
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,7 +49,7 @@
         <div class="container content">
             <div class="row">
                 <!--左边内容-->
-                <div class="col-sm-9 blog-main row-left">
+                <div class="col-sm-12 blog-main row-left">
 
                     <!--文章列表开始-->
                     <div  class="article-box">
@@ -77,79 +78,16 @@
                         </article>
 
                         <!--<p>当前 <span th:text="${PageInfo.pageNum}"></span> 页,总 <span th:text="${PageInfo.pages}"></span> 页,共 <span th:text="${PageInfo.total}"></span> 条记录</p>-->
-                        <a th:href="@{/index}">首页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.pages})}">尾页</a>
+                        <a th:href="@{/blog/search}">首页</a>
+                        <a th:href="@{/blog/search(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>
+                        <a th:href="@{/blog/search(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>
+                        <a th:href="@{/blog/search(pageNum=${PageInfo.pages})}">尾页</a>
                     </div>
                     <!--文章列表结束-->
 
                 </div>
                 <!--左边内容-->
 
-                <!--右边内容-->
-                <div class="hidden-xs col-sm-2 col-sm-offset-1 blog-sidebar row-right">
-                    <!--关于本站-->
-                    <div class="sidebar-module sidebar-module-inset personal-info">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            关于本站
-                        </h3>
-                        <!--图标-->
-                        <div class="profie">
-                            <div class="profie-top">
-                                <div>
-                                    <img th:src="@{/images/logo2.png}">
-                                </div>
-                                <div class="inspire">
-                                    The man who has made up his mind to win will never say "impossible "
-                                </div>
-                            </div>
-                            <div class="contact">
-                                <a href="javascript:"><span>微信</span></a>
-                                <a href="javascript:"><span>QQ</span></a>
-                                <a href="javascript:"><span>微博</span></a>
-                                <a href="javascript:"><span>Github</span></a>
-                            </div>
-                        </div>
-                        <!--图标-->
-                        <!--信息-->
-                        <div class="info">
-                            <span>文章: 300</span>
-                            <span>留言：300</span>
-                        </div>
-                        <!--信息-->
-                    </div>
-                    <!--关于本站-->
-                    <!--热门标签-->
-                    <div class="sidebar-module sidebar-module-inset personal-info web">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            热门标签
-                        </h3>
-                        <div class="web-info" id="app">
-                            <ul>
-                                <li><a href="javascript:"><button type="button" class="btn btn-danger">spring</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-primary">Vue</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-success">SpringMVC</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-info">Mybatis</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-warning">Springboot</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-danger">Redis</button></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--热门标签-->
-                    <!--热门文章-->
-                    <div class="sidebar-module sidebar-module-inset personal-info hot">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            热门文章
-                        </h3>
-
-                    </div>
-                    <!--热门文章-->
-                </div>
-                <!--右边内容-->
             </div>
         </div>
         <!--正文内容部分结束-->
@@ -158,7 +96,6 @@
 
     <!--</div>-->
 <!--</div>-->
-
 </body>
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -179,10 +116,14 @@
     }
     setInterval("changeColor()",1000);
 
+
     /*鼠标移开文章盒子事件*/
     function out(obj) {
         obj.style.transition="all 2s";
     }
+
+
+
 
 </script>
 </html>

@@ -25,8 +25,21 @@ public class BlogsServiceImpl implements BlogsService {
     public List<Blog> getBlogList() {
         BlogExample blogExample = new BlogExample();
         blogExample.setOrderByClause("create_time DESC");
-        List<Blog> blogList = blogMapper.selectByExampleWithBLOBs(blogExample);
-//        logger.info("查询的数据条数：" + blogList.size());
-        return blogList;
+        //        logger.info("查询的数据条数：" + blogList.size());
+        return blogMapper.selectByExampleWithBLOBs(blogExample);
+    }
+
+    /**
+     * 博客详情页
+     * @param id 博客id
+     * @return
+     */
+    @Override
+    public Blog selectDetail(Integer id) {
+        BlogExample example = new BlogExample();
+        BlogExample.Criteria criteria = example.createCriteria();
+        criteria.andBlogIdEqualTo(id);
+        List<Blog> blogList = blogMapper.selectByExampleWithBLOBs(example);
+        return blogList.get(0);
     }
 }

@@ -24,6 +24,7 @@ public class AdminController {
         return "admin/login";
     }
 
+    /*登录模块*/
     @PostMapping(value = "/login")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,

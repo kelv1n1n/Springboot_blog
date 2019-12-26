@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
+import com.example.demo.interceptor.AdminLoginInterceptor;
 import com.example.demo.interceptor.LoginInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -13,17 +15,27 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     private LoginInterceptor loginInterceptor;
 
+    private AdminLoginInterceptor adminLoginInterceptor;
+
     //构造方法
-    public InterceptorConfig(LoginInterceptor loginInterceptor){
+    public InterceptorConfig(LoginInterceptor loginInterceptor,AdminLoginInterceptor adminLoginInterceptor){
         this.loginInterceptor = loginInterceptor;
+        this.adminLoginInterceptor = adminLoginInterceptor;
     }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/testsession");
+                .addPathPatterns("/abc/**")
+                .excludePathPatterns("/login");
 //                .excludePathPatterns(excludePath);
+        registry.addInterceptor(adminLoginInterceptor)
+                .addPathPatterns("/admin/**")
+                .excludePathPatterns("/admin/login")
+                .excludePathPatterns("/admin/dist/**")
+                .excludePathPatterns("/admin/plugins/**");
         WebMvcConfigurer.super.addInterceptors(registry);
 
     }
