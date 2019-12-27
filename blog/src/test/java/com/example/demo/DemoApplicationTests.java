@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.model.*;
 import com.example.demo.repository.BlogUserMapper;
 import com.example.demo.repository.IndexTestMapper;
-import com.example.demo.repository.TestGeneratorMapper;
 import org.elasticsearch.action.admin.indices.get.GetIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -44,9 +43,6 @@ import java.util.List;
 public class DemoApplicationTests {
 
     @Resource
-    TestGeneratorMapper testGeneratorMapper;
-
-    @Resource
     BlogUserMapper blogUserMapper;
 
     @Resource
@@ -63,16 +59,6 @@ public class DemoApplicationTests {
     private void contextLoads() {
     }
 
-
-    @Test
-    public void testSave() throws Exception {
-        TestGenerator user = new TestGenerator();
-        user.setId(3);
-        user.setUsername("admin");
-        user.setPassword(123456);
-        int i = testGeneratorMapper.insert(user);
-        System.out.println(i);
-    }
 
     @Test
     public void testBlogUser() throws Exception {

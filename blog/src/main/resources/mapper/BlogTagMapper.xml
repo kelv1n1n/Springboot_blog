@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.repository.TestGeneratorMapper" >
-  <resultMap id="BaseResultMap" type="com.example.demo.model.TestGenerator" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="INTEGER" />
+<mapper namespace="com.example.demo.repository.BlogTagMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.BlogTag" >
+    <id column="tag_id" property="tagId" jdbcType="INTEGER" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,16 +66,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password
+    tag_id, tag_name, is_deleted, create_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.model.TestGeneratorExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.model.BlogTagExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user_test
+    from tb_blog_tag
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,67 +86,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_test
-    where id = #{id,jdbcType=INTEGER}
+    from tb_blog_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_test
-    where id = #{id,jdbcType=INTEGER}
+    delete from tb_blog_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.model.TestGeneratorExample" >
-    delete from user_test
+  <delete id="deleteByExample" parameterType="com.example.demo.model.BlogTagExample" >
+    delete from tb_blog_tag
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.model.TestGenerator" >
-    insert into user_test (id, username, password
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.example.demo.model.BlogTag" >
+    insert into tb_blog_tag (tag_id, tag_name, is_deleted, 
+      create_time)
+    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.TestGenerator" >
-    insert into user_test
+  <insert id="insertSelective" parameterType="com.example.demo.model.BlogTag" >
+    insert into tb_blog_tag
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="tagId != null" >
+        tag_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="tagName != null" >
+        tag_name,
       </if>
-      <if test="password != null" >
-        password,
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="tagId != null" >
+        #{tagId,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="tagName != null" >
+        #{tagName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=INTEGER},
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.model.TestGeneratorExample" resultType="java.lang.Integer" >
-    select count(*) from user_test
+  <select id="countByExample" parameterType="com.example.demo.model.BlogTagExample" resultType="java.lang.Integer" >
+    select count(*) from tb_blog_tag
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_test
+    update tb_blog_tag
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.tagId != null" >
+        tag_id = #{record.tagId,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.tagName != null" >
+        tag_name = #{record.tagName,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=INTEGER},
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,30 +163,47 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_test
-    set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=INTEGER}
+    update tb_blog_tag
+    set tag_id = #{record.tagId,jdbcType=INTEGER},
+      tag_name = #{record.tagName,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.TestGenerator" >
-    update user_test
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.BlogTag" >
+    update tb_blog_tag
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="tagName != null" >
+        tag_name = #{tagName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=INTEGER},
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.TestGenerator" >
-    update user_test
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.BlogTag" >
+    update tb_blog_tag
+    set tag_name = #{tagName,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
+
+
+  <!--//批量插入新的标签-->
+  <insert id="batchInsertBlogTag" parameterType="java.util.List" useGeneratedKeys="true"
+          keyProperty="tagId">
+    INSERT into tb_blog_tag(tag_name)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.tagName,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
 </mapper>

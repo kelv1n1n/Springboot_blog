@@ -1,6 +1,6 @@
 package com.example.demo.controller.admin;
 
-import com.example.demo.service.BlogUserService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -18,6 +18,18 @@ public class AdminController {
 
     @Autowired
     BlogUserService blogUserService;
+
+    @Autowired
+    BlogsService blogsService;
+
+    @Autowired
+    BlogCategoryService blogCategoryService;
+
+    @Autowired
+    BlogTagService blogTagService;
+
+    @Autowired
+    BlogCommentService blogCommentService;
 
     @GetMapping({"/login"})
     public String login() {
@@ -59,11 +71,11 @@ public class AdminController {
     @GetMapping({"", "/", "/index", "/index.html"})
     public String index(HttpServletRequest request) {
         request.setAttribute("path", "index");
-        request.setAttribute("categoryCount", 1);
-        request.setAttribute("blogCount", 1);
-        request.setAttribute("linkCount", 1);
-        request.setAttribute("tagCount", 1);
-        request.setAttribute("commentCount", 1);
+        request.setAttribute("categoryCount", blogCategoryService.countBlogCategory());
+        request.setAttribute("blogCount", blogsService.countBlog());
+        request.setAttribute("linkCount", 0);
+        request.setAttribute("tagCount", blogTagService.countTag());
+        request.setAttribute("commentCount", blogCommentService.countComment());
         request.setAttribute("path", "index");
         return "admin/index";
     }

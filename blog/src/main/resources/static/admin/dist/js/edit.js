@@ -7,7 +7,7 @@ $('#blogTags').tagsInput({
 });
 
 //Initialize Select2 Elements
-$('.select2').select2()
+$('.select2').select2();
 
 $(function () {
     blogEditor = editormd("blog-editormd", {
@@ -19,7 +19,7 @@ $(function () {
         /**图片上传配置*/
         imageUpload: true,
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
-        imageUploadURL: "/admin/blogs/md/uploadfile",
+        imageUploadURL: "/admin/blog/md/uploadfile",
         onload: function (obj) { //上传成功之后的回调
         }
     });
@@ -50,7 +50,7 @@ $(function () {
                                     alert("上传失败");
                                 }
                             }
-                        }
+                        };
                         xhr.send(formData);
                     }
                 }
@@ -139,6 +139,7 @@ $('#confirmButton').click(function () {
 });
 
 $('#saveButton').click(function () {
+    console.log("进来了1");
     var blogId = $('#blogId').val();
     var blogTitle = $('#blogName').val();
     var blogSubUrl = $('#blogSubUrl').val();
@@ -154,7 +155,8 @@ $('#saveButton').click(function () {
         });
         return;
     }
-    var url = '/admin/blogs/save';
+
+    var url = '/admin/blog/save';
     var swlMessage = '保存成功';
     var data = {
         "blogTitle": blogTitle, "blogSubUrl": blogSubUrl, "blogCategoryId": blogCategoryId,
@@ -162,7 +164,7 @@ $('#saveButton').click(function () {
         "enableComment": enableComment
     };
     if (blogId > 0) {
-        url = '/admin/blogs/update';
+        url = '/admin/blog/update';
         swlMessage = '修改成功';
         data = {
             "blogId": blogId,
@@ -176,13 +178,14 @@ $('#saveButton').click(function () {
             "enableComment": enableComment
         };
     }
+    console.log("进来了2");
     console.log(data);
     $.ajax({
         type: 'POST',//方法类型
         url: url,
         data: data,
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.status == 200) {
                 $('#articleModal').modal('hide');
                 swal({
                     title: swlMessage,
@@ -193,12 +196,12 @@ $('#saveButton').click(function () {
                     confirmButtonClass: 'btn btn-success',
                     buttonsStyling: false
                 }).then(function () {
-                    window.location.href = "/admin/blogs";
+                    window.location.href = "/admin/blog";
                 })
             }
             else {
                 $('#articleModal').modal('hide');
-                swal(result.message, {
+                swal(result.msg, {
                     icon: "error",
                 });
             }
@@ -213,7 +216,7 @@ $('#saveButton').click(function () {
 });
 
 $('#cancelButton').click(function () {
-    window.location.href = "/admin/blogs";
+    window.location.href = "/admin/blog";
 });
 
 /**

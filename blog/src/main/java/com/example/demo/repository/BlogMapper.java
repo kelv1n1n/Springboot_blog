@@ -10,7 +10,7 @@ public interface BlogMapper {
 
     int deleteByExample(BlogExample example);
 
-    int deleteByPrimaryKey(Integer blogId);
+    int deleteByPrimaryKey(Long blogId);
 
     int insert(Blog record);
 
@@ -20,7 +20,7 @@ public interface BlogMapper {
 
     List<Blog> selectByExample(BlogExample example);
 
-    Blog selectByPrimaryKey(Integer blogId);
+    Blog selectByPrimaryKey(Long blogId);
 
     int updateByExampleSelective(@Param("record") Blog record, @Param("example") BlogExample example);
 
@@ -33,4 +33,6 @@ public interface BlogMapper {
     int updateByPrimaryKeyWithBLOBs(Blog record);
 
     int updateByPrimaryKey(Blog record);
+
+    Long maxNewBlog();
 }

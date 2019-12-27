@@ -29,21 +29,33 @@
                         <form id="blogForm" onsubmit="return false;">
                             <div class="form-group" style="display:flex;">
                                 <input type="hidden" id="blogId" name="blogId" th:value="${blog!=null and blog.blogId!=null }?${blog.blogId}: 0">
+
+                                <!--文章标题-->
                                 <input type="text" class="form-control col-sm-6" id="blogName" name="blogName"
                                        placeholder="*请输入文章标题(必填)"
                                        th:value="${blog!=null and blog.blogTitle!=null }?${blog.blogTitle}: ''"
                                        required="true">
+
                                 &nbsp;&nbsp;
+
+                                <!--文章标签-->
                                 <input type="text" class="form-control" id="blogTags" name="blogTags"
                                        placeholder="请输入文章标签"
                                        th:value="${blog!=null and blog.blogTags!=null }?${blog.blogTags}: ''"
                                        style="width: 100%;">
+
                             </div>
                             <div class="form-group" style="display:flex;">
+
+                                <!--文章路径-->
                                 <input type="text" class="form-control col-sm-6" id="blogSubUrl"
                                        name="blogSubUrl"
                                        th:value="${blog!=null and blog.blogSubUrl!=null }?${blog.blogSubUrl}: ''"
-                                       placeholder="请输入自定义路径,如:springboot-mybatis,默认为id"> &nbsp;&nbsp;
+                                       placeholder="请输入自定义路径,如:springboot-mybatis,默认为id">
+
+                                &nbsp;&nbsp;
+
+                                <!--文章分类-->
                                 <select class="form-control select2" style="width: 100%;" id="blogCategoryId"
                                         data-placeholder="请选择分类...">
                                     <th:block th:if="${null == categories}">
@@ -58,11 +70,16 @@
                                         </th:block>
                                     </th:block>
                                 </select>
+
                             </div>
+
+                            <!--文章的内容-->
                             <div class="form-group" id="blog-editormd">
                                 <textarea style="display:none;"
                                           th:utext="${blog!=null and blog.blogContent !=null}?${blog.blogContent}: ''"></textarea>
                             </div>
+
+
                             <div class="form-group">
                                 <!-- 按钮 -->
                                 &nbsp;<button class="btn btn-info float-right" style="margin-left: 5px;"
@@ -72,12 +89,16 @@
                                               id="cancelButton">返回文章列表
                             </button>&nbsp;
                             </div>
+
+
                         </form>
                     </div>
 
                 </div>
             </div><!-- /.container-fluid -->
         </div>
+
+
         <div class="content">
             <!-- 模态框（Modal） -->
             <div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel">
@@ -142,6 +163,8 @@
             </div>
             <!-- /.modal -->
         </div>
+
+
     </div>
     <!-- /.content-wrapper -->
     <!-- 引入页脚footer-fragment -->

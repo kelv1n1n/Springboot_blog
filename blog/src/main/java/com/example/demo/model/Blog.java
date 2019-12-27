@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Blog {
-    private Integer blogId;
+    private Long blogId;
 
     private String blogTitle;
 
@@ -34,11 +34,11 @@ public class Blog {
 
     private String blogContent;
 
-    public Integer getBlogId() {
+    public Long getBlogId() {
         return blogId;
     }
 
-    public void setBlogId(Integer blogId) {
+    public void setBlogId(Long blogId) {
         this.blogId = blogId;
     }
 
