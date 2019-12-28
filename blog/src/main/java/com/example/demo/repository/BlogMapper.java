@@ -3,6 +3,8 @@ package com.example.demo.repository;
 import com.example.demo.model.Blog;
 import com.example.demo.model.BlogExample;
 import java.util.List;
+
+import com.example.demo.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
 public interface BlogMapper {
@@ -34,5 +36,12 @@ public interface BlogMapper {
 
     int updateByPrimaryKey(Blog record);
 
+    //查询最新的blog_id
     Long maxNewBlog();
+
+    //博客文章管理查询博客列表
+    List<Blog> findBlogList(PageQueryUtil pageUtil);
+
+    //总的文章数量
+    int getTotalBlogs(PageQueryUtil pageUtil);
 }

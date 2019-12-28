@@ -116,7 +116,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     ,
@@ -124,7 +124,7 @@
     from tb_blog
     where blog_id = #{blogId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_blog
     where blog_id = #{blogId,jdbcType=BIGINT}
   </delete>
@@ -415,6 +415,41 @@
   <!--查询最新的blog_id-->
   <select id="maxNewBlog" resultType="long">
     SELECT MAX(blog_id) FROM tb_blog
+  </select>
+
+  <!--博客文章管理查询博客列表-->
+  <select id="findBlogList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_blog
+    where is_deleted=0
+    <if test="keyword!=null">
+      AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))
+    </if>
+    <if test="blogStatus!=null">
+      AND blog_status = #{blogStatus}
+    </if>
+    <if test="blogCategoryId!=null">
+      AND blog_category_id = #{blogCategoryId}
+    </if>
+    order by blog_id desc
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
+
+  <select id="getTotalBlogs" parameterType="Map" resultType="int">
+    select count(*) from tb_blog
+    where is_deleted=0
+    <if test="keyword!=null">
+      AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))
+    </if>
+    <if test="blogStatus!=null">
+      AND blog_status = #{blogStatus}
+    </if>
+    <if test="blogCategoryId!=null">
+      AND blog_category_id = #{blogCategoryId}
+    </if>
   </select>
 
 </mapper>

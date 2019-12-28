@@ -32,7 +32,7 @@ public class BlogController {
 
     /*点击进入博客详细页*/
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable("id") Integer blogId,Model model){
+    public String detail(@PathVariable("id") Long blogId,Model model){
 //        logger.info("博客id:" + blogId);
         //根据博客的id查出该条博客
         Blog blog = blogsService.selectDetail(blogId);

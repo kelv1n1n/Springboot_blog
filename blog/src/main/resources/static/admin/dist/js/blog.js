@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/admin/blogs/list',
+        url: '/admin/blog/list',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'blogId', index: 'blogId', width: 50, key: true, hidden: true},
@@ -12,8 +12,8 @@ $(function () {
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 90}
         ],
         height: 700,
-        rowNum: 10,
-        rowList: [10, 20, 50],
+        rowNum: 5,
+        rowList: [5, 10, 20],
         styleUI: 'Bootstrap',
         loadtext: '信息读取中...',
         rownumbers: false,
@@ -76,7 +76,7 @@ function search() {
     //点击搜索按钮默认都从第一页开始
     $("#jqGrid").jqGrid("setGridParam", {page: 1});
     //提交post并刷新表格
-    $("#jqGrid").jqGrid("setGridParam", {url: '/admin/blogs/list'}).trigger("reloadGrid");
+    $("#jqGrid").jqGrid("setGridParam", {url: '/admin/blog/list'}).trigger("reloadGrid");
 }
 
 /**
@@ -90,7 +90,7 @@ function reload() {
 }
 
 function addBlog() {
-    window.location.href = "/admin/blogs/edit";
+    window.location.href = "/admin/blog/edit";
 }
 
 function editBlog() {
@@ -98,7 +98,7 @@ function editBlog() {
     if (id == null) {
         return;
     }
-    window.location.href = "/admin/blogs/edit/" + id;
+    window.location.href = "/admin/blog/edit/" + id;
 }
 
 function deleteBlog() {

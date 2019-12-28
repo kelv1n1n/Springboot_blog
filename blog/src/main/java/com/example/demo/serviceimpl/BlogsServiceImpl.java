@@ -6,6 +6,8 @@ import com.example.demo.repository.BlogMapper;
 import com.example.demo.repository.BlogTagMapper;
 import com.example.demo.repository.BlogTagRelationMapper;
 import com.example.demo.service.BlogsService;
+import com.example.demo.util.PageQueryUtil;
+import com.example.demo.util.PageResult;
 import com.example.demo.vo.PersonalResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +51,7 @@ public class BlogsServiceImpl implements BlogsService {
      * @return
      */
     @Override
-    public Blog selectDetail(Integer id) {
+    public Blog selectDetail(Long id) {
         BlogExample example = new BlogExample();
         BlogExample.Criteria criteria = example.createCriteria();
         criteria.andBlogIdEqualTo(id);
@@ -147,5 +149,30 @@ public class BlogsServiceImpl implements BlogsService {
             }
         }
         return PersonalResult.build(300,"失败");
+    }
+
+
+    /**
+     * 博客文章管理查询博客列表
+     * @param pageQueryUtil
+     * @return
+     */
+    @Override
+    public PageResult getAllBlog(PageQueryUtil pageQueryUtil) {
+        List<Blog> blogList = blogMapper.findBlogList(pageQueryUtil);
+//        logger.info("查出来的博客列表：" + blogList.toString());
+        int total = blogMapper.getTotalBlogs(pageQueryUtil);
+        PageResult pageResult = new PageResult(blogList, total, pageQueryUtil.getLimit(), pageQueryUtil.getPage());
+        return pageResult;
+    }
+
+
+    /**
+     * 根据文章id查询信息
+     * @return
+     */
+    @Override
+    public Blog selectOneById(Long blogId) {
+        return blogMapper.selectByPrimaryKey(blogId);
     }
 }
