@@ -215,6 +215,24 @@ body{
 }
 /*文章列表结束*/
 
+
+/*分页按钮*/
+.page{
+    text-align: center;
+    margin: 18px 0;
+}
+.page a{
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 2px;
+}
+.page a:hover{
+    text-decoration: none;
+    background-color: #f1f1f1;
+}
+
+
 /*正文部分结束*/
 /*=======================================================正文部分结束====================================================*/
 
@@ -301,9 +319,44 @@ body{
     margin-top: 15px;
 }
 
-.row-right .hot{
+.row-right .hots{
     margin-top: 15px;
 }
+
+
+/*热门博客*/
+.hot{
+    background-color: #fff;
+    margin-top: 0;
+}
+
+.hot ol{
+    padding: 20px;
+    font-size: 16px;
+}
+
+.hot ol li{
+    margin-bottom: 4px;
+}
+
+.hot ol li span{
+    height: 20px;
+    line-height: 100%;
+    margin-bottom: 2px;
+}
+
+.hot ol li{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
+}
+
+.hot ol li a:hover{
+    text-decoration: none;
+}
+
 /*个人信息结束*/
 /*=======================================================个人信息结束====================================================*/
 

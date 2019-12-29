@@ -68,19 +68,20 @@
                                     <span class="glyphicon glyphicon-user user" style="color: #999;font-size: 14px;"> 李达豪</span>
                                     <span class="time hidden-xs">发表于:<span th:text="${#dates.format(bloglist.getCreateTime(), 'yyyy-MM-dd')}"></span></span>
                                     <ul>
-                                        <li><a href="javascript:" class="glyphicon glyphicon-thumbs-up"><span>20</span></a></li>
+                                        <!--<li><a href="javascript:" class="glyphicon glyphicon-thumbs-up"><span>20</span></a></li>-->
                                         <li><a href="javascript:" class="glyphicon glyphicon-eye-open"><span th:text="${bloglist.getBlogViews()}"></span></a></li>
-                                        <li><a href="javascript:" class="glyphicon glyphicon-edit"><span>20</span></a></li>
+                                        <li><a href="javascript:" class="glyphicon glyphicon-edit"><span>0</span></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </article>
+                        <div class="page">
+                            <a th:href="@{/index}">首页</a>
+                            <a th:href="@{/index(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>
+                            <a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>
+                            <a th:href="@{/index(pageNum=${PageInfo.pages})}">尾页</a>
+                        </div>
 
-                        <!--<p>当前 <span th:text="${PageInfo.pageNum}"></span> 页,总 <span th:text="${PageInfo.pages}"></span> 页,共 <span th:text="${PageInfo.total}"></span> 条记录</p>-->
-                        <a th:href="@{/index}">首页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>
-                        <a th:href="@{/index(pageNum=${PageInfo.pages})}">尾页</a>
                     </div>
                     <!--文章列表结束-->
 
@@ -109,13 +110,13 @@
                                 <a href="javascript:"><span>微信</span></a>
                                 <a href="javascript:"><span>QQ</span></a>
                                 <a href="javascript:"><span>微博</span></a>
-                                <a href="javascript:"><span>Github</span></a>
+                                <a href="https://github.com/Ctrl08" target="_blank"><span>Github</span></a>
                             </div>
                         </div>
                         <!--图标-->
                         <!--信息-->
                         <div class="info">
-                            <span>文章: 300</span>
+                            <span th:text="${'文章：' + BlogCount}"></span>
                             <span>留言：300</span>
                         </div>
                         <!--信息-->
@@ -129,23 +130,29 @@
                         </h3>
                         <div class="web-info" id="app">
                             <ul>
-                                <li><a href="javascript:"><button type="button" class="btn btn-danger">spring</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-primary">Vue</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-success">SpringMVC</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-info">Mybatis</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-warning">Springboot</button></a></li>
-                                <li><a href="javascript:"><button type="button" class="btn btn-danger">Redis</button></a></li>
+                                <li th:each="tag : ${BlogTagList}">
+                                    <a href="javascript:">
+                                        <button th:text="${tag.getTagName()}" type="button" class="btn btn-danger"></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <!--热门标签-->
                     <!--热门文章-->
-                    <div class="sidebar-module sidebar-module-inset personal-info hot">
+                    <div class="sidebar-module sidebar-module-inset personal-info hots">
                         <h3 class="title">
                             <span class="glyphicon glyphicon-list"></span>
                             热门文章
                         </h3>
-
+                        <div class="hot">
+                            <ol>
+                                <li th:each="h : ${HotBlog}">
+                                    <span th:text="${hStat.count}" class="badge"></span>
+                                    <a href="javascript:" th:text="${h.blogTitle}">测试文章</a>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
                     <!--热门文章-->
                 </div>

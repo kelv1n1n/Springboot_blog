@@ -336,4 +336,14 @@ public class BlogsServiceImpl implements BlogsService {
         }
         return false;
     }
+
+
+    /**
+     * 热门文章 查询5条
+     * @return
+     */
+    @Override
+    public List<Blog> hotBlog() {
+        return blogMapper.hotBlog();
+    }
 }

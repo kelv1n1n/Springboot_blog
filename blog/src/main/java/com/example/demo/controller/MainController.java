@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Blog;
+import com.example.demo.model.BlogTag;
+import com.example.demo.service.BlogTagService;
 import com.example.demo.service.BlogsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,14 +30,22 @@ public class MainController {
     @Autowired
     BlogsService blogsService;
 
+    @Autowired
+    BlogTagService blogTagService;
+
     /*首页入口*/
     @GetMapping({"/index", "/", "/toMain"})
     public String index(Model model,@RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
         PageHelper.startPage(pageNum,5);
         List<Blog> blogList = blogsService.getBlogList();
-//        logger.info("博客内容:" + blogList.get(0).toString());
         PageInfo<Blog> pageInfo = new PageInfo<>(blogList);
+        List<BlogTag> blogTags = blogTagService.selectTag();
+        List<Blog> hotBlogs = blogsService.hotBlog();
+
         model.addAttribute("PageInfo",pageInfo);
+        model.addAttribute("BlogCount",blogsService.countBlog());
+        model.addAttribute("BlogTagList",blogTags);
+        model.addAttribute("HotBlog",hotBlogs);
         return "main";
     }
 
