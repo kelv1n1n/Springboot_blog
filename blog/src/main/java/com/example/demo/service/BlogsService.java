@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Blog;
 import com.example.demo.util.PageQueryUtil;
 import com.example.demo.util.PageResult;
+import com.example.demo.vo.BlogDetailVO;
 import com.example.demo.vo.PersonalResult;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface BlogsService {
     List<Blog> getBlogList();
 
     //博客详情页
-    Blog selectDetail(Long id);
+    BlogDetailVO selectDetail(Long id);
 
     //统计文章总数
     Integer countBlog();
@@ -26,5 +27,11 @@ public interface BlogsService {
 
     //根据文章id查询信息
     Blog selectOneById(Long blogId);
+
+    //更新编辑的博客文章
+    PersonalResult updateBlog(Blog blog);
+
+    //删除博客文章 即根据博客文章id修改  是否删除  字段
+    Boolean deleteBlog(Integer[] ids);
 
 }

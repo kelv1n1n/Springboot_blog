@@ -44,4 +44,7 @@ public interface BlogMapper {
 
     //总的文章数量
     int getTotalBlogs(PageQueryUtil pageUtil);
+
+    //删除博客文章 即根据博客文章id修改  是否删除  字段
+    int deleteBatch(Integer[] ids);
 }

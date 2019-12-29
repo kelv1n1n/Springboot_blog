@@ -14,6 +14,7 @@ $(function () {
         width: "100%",
         height: 640,
         syncScrolling: "single",
+        saveHTMLToTextarea:true,
         path: "/admin/plugins/editormd/lib/",
         toolbarModes: 'full',
         /**图片上传配置*/

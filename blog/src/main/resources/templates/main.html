@@ -57,7 +57,7 @@
                             <figure class="article-left hidden-xs">
                                 <span>
                                     <a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}" style="width: 100%">
-                                        <img th:src="@{/images/200251882-004.jpg}" style="width: 100%" alt="图片加载失败啦啦啦啦啦啦">
+                                        <img th:src="@{${bloglist.getBlogCoverImage()}}" style="width: 100%" alt="图片加载失败啦啦啦啦啦啦">
                                     </a>
                                 </span>
                             </figure>

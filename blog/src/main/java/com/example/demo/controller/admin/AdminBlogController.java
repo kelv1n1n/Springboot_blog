@@ -7,6 +7,7 @@ import com.example.demo.service.BlogsService;
 import com.example.demo.util.PageQueryUtil;
 import com.example.demo.util.PageResult;
 import com.example.demo.vo.PersonalResult;
+import io.netty.util.Constant;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,6 +94,67 @@ public class AdminBlogController {
     }
 
     /**
+     * 博客的编辑更新
+     * @param blogId
+     * @param blogTitle
+     * @param blogSubUrl
+     * @param blogCategoryId
+     * @param blogTags
+     * @param blogContent
+     * @param blogCoverImage
+     * @param blogStatus
+     * @param enableComment
+     * @return
+     */
+    @PostMapping("/blog/update")
+    @ResponseBody
+    public PersonalResult update(@RequestParam("blogId") Long blogId,
+                         @RequestParam("blogTitle") String blogTitle,
+                         @RequestParam(name = "blogSubUrl", required = false) String blogSubUrl,
+                         @RequestParam("blogCategoryId") Integer blogCategoryId,
+                         @RequestParam("blogTags") String blogTags,
+                         @RequestParam("blogContent") String blogContent,
+                         @RequestParam("blogCoverImage") String blogCoverImage,
+                         @RequestParam("blogStatus") Byte blogStatus,
+                         @RequestParam("enableComment") Byte enableComment) {
+        Blog blog = new Blog();
+        blog.setBlogId(blogId);
+        blog.setBlogTitle(blogTitle);
+        blog.setBlogSubUrl(blogSubUrl);
+        blog.setBlogCategoryId(blogCategoryId);
+        blog.setBlogTags(blogTags);
+        blog.setBlogContent(blogContent);
+        blog.setBlogCoverImage(blogCoverImage);
+        blog.setBlogStatus(blogStatus);
+        blog.setEnableComment(enableComment);
+        PersonalResult result = blogsService.updateBlog(blog);
+        if (result.getStatus() == 200){
+            return PersonalResult.build(200,"保存成功");
+        }
+        return PersonalResult.build(300,result.getMsg());
+    }
+
+
+    /**
+     * 博客文章的删除
+     * @param ids
+     * @return
+     */
+    @PostMapping("/blog/delete")
+    @ResponseBody
+    public PersonalResult deleteBlog(@RequestBody Integer[] ids){
+        if (ids.length < 1){
+            return PersonalResult.build(300,"数据异常");
+        }
+        Boolean aBoolean = blogsService.deleteBlog(ids);
+        if (aBoolean = true){
+            return PersonalResult.build(200,"删除成功");
+        }
+        return PersonalResult.build(300,"删除失败");
+    }
+
+
+    /**
      * 管理博客
      * @param request
      * @return
@@ -112,7 +177,6 @@ public class AdminBlogController {
     @ResponseBody
     public Map<String,Object> uploadFileByEditormd(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "editormd-image-file", required = true)
                                              MultipartFile file) {
-//        return null;
         Map<String,Object> resultMap = new HashMap<String,Object>();
         //保存
         try {
@@ -121,7 +185,7 @@ public class AdminBlogController {
             if(!targetFile.getParentFile().exists())
                 targetFile.getParentFile().mkdirs();
             file.transferTo(targetFile);
-            
+
             resultMap.put("success", 1);
             resultMap.put("message", "上传成功！");
             resultMap.put("url","http://localhost:8080/img/upload/"+file.getOriginalFilename());
@@ -132,6 +196,7 @@ public class AdminBlogController {
         }
         System.out.println(resultMap.get("success"));
         return resultMap;
+
     }
 
 

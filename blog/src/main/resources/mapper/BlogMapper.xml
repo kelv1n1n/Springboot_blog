@@ -452,4 +452,15 @@
     </if>
   </select>
 
+  <!--//删除博客文章 即根据博客文章id修改  是否删除  字段-->
+  <update id="deleteBatch">
+
+    update tb_blog
+    set is_deleted=1 where blog_id in
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+
+  </update>
+
 </mapper>

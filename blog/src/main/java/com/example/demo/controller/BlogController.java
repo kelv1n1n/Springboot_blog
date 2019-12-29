@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Blog;
 import com.example.demo.service.BlogsService;
+import com.example.demo.vo.BlogDetailVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class BlogController {
     public String detail(@PathVariable("id") Long blogId,Model model){
 //        logger.info("博客id:" + blogId);
         //根据博客的id查出该条博客
-        Blog blog = blogsService.selectDetail(blogId);
+        BlogDetailVO blog = blogsService.selectDetail(blogId);
 //        logger.info(blog.toString());
         model.addAttribute("Blog",blog);
         return "blog_detail";

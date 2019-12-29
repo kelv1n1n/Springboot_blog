@@ -116,11 +116,11 @@ function deleteBlog() {
             if (flag) {
                 $.ajax({
                     type: "POST",
-                    url: "/admin/blogs/delete",
+                    url: "/admin/blog/delete",
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.status == 200) {
                             swal("删除成功", {
                                 icon: "success",
                             });
