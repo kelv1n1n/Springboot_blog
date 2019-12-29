@@ -63,9 +63,21 @@
 
         <!--博客详细-->
         <div class="container content">
-            <div class="am-g am-g-fixed blog-fixed">
+            <div class="am-g am-g-fixed blog-fixed" style="background-color: #fff">
                 <div class="am-u-lg-12 am-u-sm-12">
                     <article class="am-article blog-article-p article-trigger">
+
+                        <div class="post-header">
+                            <h1 class="post-title" itemprop="name headline">
+                                <span th:text="${Blog.blogTitle}" data-no-instant=""></span>
+                            </h1>
+                            <div class="post-data">
+                                <time itemprop="datePublished" th:text="'发布于 '+ ${#dates.format(Blog.createTime,'yyyy-MM-dd HH:mm')}"></time>
+                                / <th:block th:utext="${Blog.blogCategoryName}"/> / <th:block th:text="${Blog.commentCount ?: 0}+' 条评论'" /> /
+                                <th:block th:text="${Blog.blogViews}"/>浏览
+                            </div>
+                        </div>
+                        <div class="borders"></div>
                         <div id="post-content" class="am-article-bd article-body">
                             <th:block th:utext="${Blog.blogContent}"/>
                             <aside class="blog-rights clearfix">
