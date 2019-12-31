@@ -41,123 +41,172 @@
 <!--<div id="particles">-->
     <!--<div id="intro" style="min-height: 100%;">-->
         <!--头部导航栏开始-->
-        <div th:replace="~{/header :: header}"></div>
+        <header th:replace="~{/header :: header}"></header>
         <!--头部导航栏结束-->
+
+        <div class="background-img hero">
+            <div class="hero__wrap">
+                <h1 class="hero__title">House</h1>
+                <span class="hero_meta">The man who has made up his mind to win will never say "impossible "</span>
+            </div>
+        </div>
 
         <!--正文内容部分开始-->
         <div class="container content">
+
             <div class="row">
                 <!--左边内容-->
-                <div class="col-sm-9 blog-main row-left">
 
-                    <!--文章列表开始-->
-                    <div  class="article-box">
-                        <article th:each="bloglist:${PageInfo.list}" onmouseout="out(this)" class="article-content">
-                            <!--插图标签-->
-                            <figure class="article-left hidden-xs">
-                                <span>
-                                    <a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}" style="width: 100%">
-                                        <img th:src="@{${bloglist.getBlogCoverImage()}}" style="width: 100%" alt="图片加载失败啦啦啦啦啦啦">
-                                    </a>
-                                </span>
-                            </figure>
-                            <div class="article-right">
-                                <h4><a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}" class="title" th:text="${bloglist.getBlogTitle()}"></a></h4>
-                                <div class="article-right-content" th:text="${bloglist.getBlogContent()}"></div>
-                                <div class="article-right-info">
-                                    <span class="glyphicon glyphicon-user user" style="color: #999;font-size: 14px;"> 李达豪</span>
-                                    <span class="time hidden-xs">发表于:<span th:text="${#dates.format(bloglist.getCreateTime(), 'yyyy-MM-dd')}"></span></span>
-                                    <ul>
-                                        <!--<li><a href="javascript:" class="glyphicon glyphicon-thumbs-up"><span>20</span></a></li>-->
-                                        <li><a href="javascript:" class="glyphicon glyphicon-eye-open"><span th:text="${bloglist.getBlogViews()}"></span></a></li>
-                                        <li><a href="javascript:" class="glyphicon glyphicon-edit"><span>0</span></a></li>
-                                    </ul>
-                                </div>
+                <div class="col-sm-12 col-md-4" th:each="bloglist:${PageInfo.list}">
+                    <div class="thumbnail article" onmouseout="out(this)">
+                        <img th:src="@{${bloglist.getBlogCoverImage()}}" style="width: 100%;height: 280px; border-radius: 4px 4px 0px 0px;" alt="图片加载失败啦啦啦啦啦啦">
+                        <span class="cat" th:text="${bloglist.blogCategoryName}"></span>
+                        <div class="caption article-bottom">
+                            <a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}"><h3 class="title" th:text="${bloglist.getBlogTitle()}"></h3></a>
+                            <p class="contents" th:text="${bloglist.getBlogContent()}">...</p>
+                            <div class="datatime">
+                                <p th:text="${#dates.format(bloglist.getCreateTime(), 'yyyy-MM-dd')}"></p>
+                                <p th:text="${'浏览:'+bloglist.getBlogViews()}"></p>
                             </div>
-                        </article>
-                        <div class="page">
-                            <a th:href="@{/index}">首页</a>
-                            <a th:href="@{/index(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>
-                            <a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>
-                            <a th:href="@{/index(pageNum=${PageInfo.pages})}">尾页</a>
                         </div>
-
                     </div>
-                    <!--文章列表结束-->
-
                 </div>
+
+                <!--<div class="col-sm-9 blog-main row-left">-->
+                    <!--&lt;!&ndash;文章列表开始&ndash;&gt;-->
+                    <!--<div  class="article-box">-->
+                        <!--<article th:each="bloglist:${PageInfo.list}" class="article-content">-->
+                            <!--&lt;!&ndash;插图标签&ndash;&gt;-->
+                            <!--<figure class="article-left hidden-xs">-->
+                                <!--<span>-->
+                                    <!--<a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}" style="width: 100%">-->
+                                        <!--<img th:src="@{${bloglist.getBlogCoverImage()}}" style="width: 100%" alt="图片加载失败啦啦啦啦啦啦">-->
+                                    <!--</a>-->
+                                <!--</span>-->
+                            <!--</figure>-->
+                            <!--<div class="article-right">-->
+                                <!--<h4><a th:href="@{'/blog/detail/' + ${bloglist.getBlogId()}}" class="title" th:text="${bloglist.getBlogTitle()}"></a></h4>-->
+                                <!--<div class="article-right-content" th:text="${bloglist.getBlogContent()}"></div>-->
+                                <!--<div class="article-right-info">-->
+                                    <!--&lt;!&ndash;<span class="glyphicon glyphicon-user user" style="color: #999;font-size: 14px;"> 李达豪</span>&ndash;&gt;-->
+                                    <!--<span class="date" th:text="${#dates.format(bloglist.getCreateTime(), 'yyyy-MM-dd')}"></span>-->
+                                    <!--<ul>-->
+                                        <!--&lt;!&ndash;<li><a href="javascript:" class="glyphicon glyphicon-thumbs-up"><span>20</span></a></li>&ndash;&gt;-->
+                                        <!--<li><a href="javascript:" class="glyphicon glyphicon-eye-open"><span th:text="${bloglist.getBlogViews()}"></span></a></li>-->
+                                        <!--<li><a href="javascript:" class="glyphicon glyphicon-edit"><span>0</span></a></li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</article>-->
+                        <!--<div class="page">-->
+                            <!--<a th:href="@{/index}">首页</a>-->
+                            <!--<a th:href="@{/index(pageNum=${PageInfo.hasPreviousPage}?${PageInfo.prePage}:1)}">上一页</a>-->
+                            <!--<a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}">下一页</a>-->
+                            <!--<a th:href="@{/index(pageNum=${PageInfo.pages})}">尾页</a>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--&lt;!&ndash;文章列表结束&ndash;&gt;-->
+
+                <!--</div>-->
                 <!--左边内容-->
 
                 <!--右边内容-->
-                <div class="hidden-xs col-sm-2 col-sm-offset-1 blog-sidebar row-right">
-                    <!--关于本站-->
-                    <div class="sidebar-module sidebar-module-inset personal-info">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            关于本站
-                        </h3>
-                        <!--图标-->
-                        <div class="profie">
-                            <div class="profie-top">
-                                <div>
-                                    <img th:src="@{/images/logo2.png}">
-                                </div>
-                                <div class="inspire">
-                                    The man who has made up his mind to win will never say "impossible "
-                                </div>
-                            </div>
-                            <div class="contact">
-                                <a href="javascript:"><span>微信</span></a>
-                                <a href="javascript:"><span>QQ</span></a>
-                                <a href="javascript:"><span>微博</span></a>
-                                <a href="https://github.com/Ctrl08" target="_blank"><span>Github</span></a>
-                            </div>
-                        </div>
-                        <!--图标-->
-                        <!--信息-->
-                        <div class="info">
-                            <span th:text="${'文章：' + BlogCount}"></span>
-                            <span>留言：300</span>
-                        </div>
-                        <!--信息-->
-                    </div>
-                    <!--关于本站-->
-                    <!--热门标签-->
-                    <div class="sidebar-module sidebar-module-inset personal-info web">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            热门标签
-                        </h3>
-                        <div class="web-info" id="app">
-                            <ul>
-                                <li th:each="tag : ${BlogTagList}">
-                                    <a href="javascript:">
-                                        <button th:text="${tag.getTagName()}" type="button" class="btn btn-danger"></button>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--热门标签-->
-                    <!--热门文章-->
-                    <div class="sidebar-module sidebar-module-inset personal-info hots">
-                        <h3 class="title">
-                            <span class="glyphicon glyphicon-list"></span>
-                            热门文章
-                        </h3>
-                        <div class="hot">
-                            <ol>
-                                <li th:each="h : ${HotBlog}">
-                                    <span th:text="${hStat.count}" class="badge"></span>
-                                    <a href="javascript:" th:text="${h.blogTitle}">测试文章</a>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                    <!--热门文章-->
-                </div>
+                <!--<div class="hidden-xs col-sm-2 col-sm-offset-1 blog-sidebar row-right">-->
+                    <!--&lt;!&ndash;关于本站&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="sidebar-module sidebar-module-inset personal-info">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<h3 class="title">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="glyphicon glyphicon-list"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;关于本站&ndash;&gt;-->
+                        <!--&lt;!&ndash;</h3>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;图标&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="profie">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="profie-top">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<img th:src="@{/images/logo2.png}">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="inspire">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;The man who has made up his mind to win will never say "impossible "&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="contact">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="javascript:"><span>微信</span></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="javascript:"><span>QQ</span></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="javascript:"><span>微博</span></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="https://github.com/Ctrl08" target="_blank"><span>Github</span></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;图标&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;信息&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="info">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span th:text="${'文章：' + BlogCount}"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span>留言：300</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;信息&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;关于本站&ndash;&gt;-->
+                    <!--&lt;!&ndash;热门标签&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="sidebar-module sidebar-module-inset personal-info web">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<h3 class="title">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="glyphicon glyphicon-list"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;热门标签&ndash;&gt;-->
+                        <!--&lt;!&ndash;</h3>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="web-info" id="app">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li th:each="tag : ${BlogTagList}">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="javascript:">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<button th:text="${tag.getTagName()}" type="button" class="btn btn-danger"></button>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;热门标签&ndash;&gt;-->
+                    <!--&lt;!&ndash;热门文章&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="sidebar-module sidebar-module-inset personal-info hots">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<h3 class="title">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="glyphicon glyphicon-list"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;热门文章&ndash;&gt;-->
+                        <!--&lt;!&ndash;</h3>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="hot">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<ol>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li th:each="h : ${HotBlog}">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span th:text="${hStat.count}" class="badge"></span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a th:href="@{'/blog/detail/' + ${h.blogId}}" th:text="${h.blogTitle}">测试文章</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</ol>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;热门文章&ndash;&gt;-->
+                <!--</div>-->
                 <!--右边内容-->
             </div>
+
+            <!--分页开始-->
+            <nav th:if="${PageInfo.pages > 1}" aria-label="Page navigation" style="text-align: center;">
+                <ul class="pagination">
+                    <li th:if="${PageInfo.hasPreviousPage}">
+                        <a th:href="@{/index(pageNum=${PageInfo.prePage})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <th:block th:each="nav : ${PageInfo.navigatepageNums}">
+                        <li th:class="${nav==PageInfo.pageNum}?'active':''">
+                            <a th:href="@{/index(pageNum=${nav})}" th:text="${nav}">1</a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${PageInfo.hasNextPage}">
+                        <a th:href="@{/index(pageNum=${PageInfo.hasNextPage}?${PageInfo.nextPage}:${PageInfo.pages})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--分页结束-->
+
+
         </div>
         <!--正文内容部分结束-->
 
@@ -177,19 +226,21 @@
 <script th:src="@{/js/jquery.min.2.1.1.js}" ></script>
 <script language="javascript">
 
-    <!--字体闪烁-->
-    function changeColor(){
-        var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
-        color=color.split("|");
-        document.getElementById("blink").style.color=color[parseInt(Math.random() *
-            color.length)];
-    }
-    setInterval("changeColor()",1000);
+    // <!--字体闪烁-->
+    // function changeColor(){
+    //     var color="#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+    //     color=color.split("|");
+    //     document.getElementById("blink").style.color=color[parseInt(Math.random() *
+    //         color.length)];
+    // }
+    // setInterval("changeColor()",1000);
 
-    /*鼠标移开文章盒子事件*/
+    // /*鼠标移开文章盒子事件*/
     function out(obj) {
         obj.style.transition="all 2s";
     }
+
+
 
 </script>
 </html>

@@ -465,7 +465,7 @@
 
   <!--热门文章-->
   <select id="hotBlog" resultMap="BaseResultMap">
-    SELECT blog_title FROM tb_blog ORDER BY blog_views DESC LIMIT 5;
+    SELECT blog_id, blog_title FROM tb_blog ORDER BY blog_views DESC LIMIT 5;
   </select>
 
 </mapper>

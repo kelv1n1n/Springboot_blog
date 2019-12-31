@@ -58,7 +58,7 @@ public class BlogController {
         blogList1.add(blogList.get(0));
         PageInfo<Blog> pageInfo = new PageInfo<>(blogList1);
         model.addAttribute("PageInfo",pageInfo);
-        return "search_blog";
+        return "null";
     }
 
 }

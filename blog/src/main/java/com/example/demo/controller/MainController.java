@@ -36,7 +36,7 @@ public class MainController {
     /*首页入口*/
     @GetMapping({"/index", "/", "/toMain"})
     public String index(Model model,@RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,6);
         List<Blog> blogList = blogsService.getBlogList();
         PageInfo<Blog> pageInfo = new PageInfo<>(blogList);
         List<BlogTag> blogTags = blogTagService.selectTag();
@@ -68,5 +68,6 @@ public class MainController {
         session.removeAttribute("result");
         return "redirect:index";
     }
+
 
 }
