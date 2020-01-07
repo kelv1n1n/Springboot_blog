@@ -44,21 +44,21 @@ public class BlogController {
 
 
     /*搜索博客*/
-    @GetMapping("/search")
-    public String searchBlogs(HttpServletRequest request,
-                              Model model,
-                              @RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
-
-        String content = request.getParameter("content");
-        logger.info("content:=====>" + content);
-
-        PageHelper.startPage(pageNum,5);
-        List<Blog> blogList = blogsService.getBlogList();
-        List<Blog> blogList1  = new ArrayList<>();
-        blogList1.add(blogList.get(0));
-        PageInfo<Blog> pageInfo = new PageInfo<>(blogList1);
-        model.addAttribute("PageInfo",pageInfo);
-        return "null";
-    }
+//    @GetMapping("/search")
+//    public String searchBlogs(HttpServletRequest request,
+//                              Model model,
+//                              @RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
+//
+//        String content = request.getParameter("content");
+////        logger.info("content:=====>" + content);
+//
+//        PageHelper.startPage(pageNum,5);
+//        List<Blog> blogList = blogsService.getBlogList();
+//        List<Blog> blogList1  = new ArrayList<>();
+//        blogList1.add(blogList.get(0));
+//        PageInfo<Blog> pageInfo = new PageInfo<>(blogList1);
+//        model.addAttribute("PageInfo",pageInfo);
+//        return "null";
+//    }
 
 }

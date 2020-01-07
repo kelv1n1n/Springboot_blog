@@ -50,4 +50,5 @@ public interface BlogMapper {
 
     //热门文章
     List<Blog> hotBlog();
+
 }

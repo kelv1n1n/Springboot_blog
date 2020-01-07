@@ -1,7 +1,10 @@
 body{
     background-color: #f9f9f9;
-}
 
+}
+.father{
+    position: relative;
+}
 /*头部开始*/
 .header{
     position: absolute;
@@ -18,9 +21,7 @@ body{
     margin-bottom: 0;
     /*box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);*/
 }
-.nav{
-    padding-left: 30px;
-}
+
 .navbar .nav>li>a{
     height: 100%;
     display: block;
@@ -43,6 +44,12 @@ body{
     justify-content: space-between;
 }
 
+.search-form{
+    text-align: center;
+}
+.search-form .form-group{
+    display: inline-block;
+}
 /*.navbar .nav>li:hover{*/
     /*border-bottom: 2px solid red;*/
     /*color: #000000;*/
@@ -66,7 +73,7 @@ body{
 }
 
 .hero {
-    margin: 2.75rem auto 0;
+    /*margin: 2.75rem auto 0;*/
     min-height: 16.25rem;
     width: 100%;
     position: relative;
@@ -120,7 +127,7 @@ body{
 .hero__wrap {
     position: absolute;
     margin: auto;
-    top: 50%;
+    top: 56%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -151,12 +158,13 @@ body{
 }
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      /*==================================================正文部分开始========================================================*/
+/*==================================================正文部分开始========================================================*/
 
 /*正文部分开始*/
 .content{
     padding-top: 2.5em;
     overflow: hidden;
+    margin-bottom: 54px;
 }
 
 .contents{
@@ -533,18 +541,26 @@ body{
 /*个人信息结束*/
 /*=======================================================个人信息结束====================================================*/
 
-.footer{
-
-}
-.text{
+.footers{
+    /*position: relative;*/
     height: 54px;
     line-height: 54px;
-    background-color: #fff;
-    position: relative;
-    bottom: 0;
+    position: absolute;
+    bottom: -54px;
     width: 100%;
     text-align: center;
-    margin-top: 10px;
 }
-
+/*@media screen and (min-width: 1000px) {*/
+    /*.empty {*/
+        /*height: 313px;*/
+    /*}*/
+/*}*/
+/*.empty{*/
+    /*height: 109px;*/
+/*}*/
+/*@media screen and (max-width: 400px) {*/
+    /*.empty {*/
+        /*height: 313px;*/
+    /*}*/
+/*}*/
 /*======================================================文章详情页======================================================*/

@@ -188,7 +188,8 @@ public class AdminBlogController {
 
             resultMap.put("success", 1);
             resultMap.put("message", "上传成功！");
-            resultMap.put("url","http://localhost:8080/img/upload/"+file.getOriginalFilename());
+//            resultMap.put("url","http://localhost:8080/img/upload/"+file.getOriginalFilename());
+            resultMap.put("url","http://106.52.120.248/img/upload/"+file.getOriginalFilename());
         } catch (Exception e) {
             resultMap.put("success", 0);
             resultMap.put("message", "上传失败！");

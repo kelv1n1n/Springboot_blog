@@ -36,7 +36,7 @@ public class CommonController {
         httpServletResponse.setHeader("Cache-Control", "no-store");
         httpServletResponse.setHeader("Pragma", "no-cache");
         httpServletResponse.setDateHeader("Expires", 0);
-        httpServletResponse.setContentType("image/jpeg");
+        httpServletResponse.setContentType("jpeg");
         ServletOutputStream responseOutputStream = httpServletResponse.getOutputStream();
         responseOutputStream.write(captchaOutputStream);
         responseOutputStream.flush();

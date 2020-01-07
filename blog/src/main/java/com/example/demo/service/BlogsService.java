@@ -36,4 +36,7 @@ public interface BlogsService {
 
     //热门文章 查询5条
     List<Blog> hotBlog();
+
+    //首页搜索功能
+    List<Blog> searchBlog(String keyword);
 }

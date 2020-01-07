@@ -66,8 +66,8 @@ public class DemoApplicationTests {
         user.setId("11111111111");
         user.setUsername("admin");
         user.setPassword("1111111111");
-        int i = blogUserMapper.insert(user);
-        System.out.println(i);
+//        int i = blogUserMapper.insert(user);
+//        System.out.println(i);
     }
 
 
@@ -107,7 +107,7 @@ public class DemoApplicationTests {
 //        bulk();
 
         //模糊检索
-        searchShould(INDEX_TEST,"this");
+//        searchShould(INDEX_TEST,"this");
 
     }
 
@@ -119,7 +119,7 @@ public class DemoApplicationTests {
             indexTest = new IndexTest();
             indexTest.setId(Long.valueOf(i));
             indexTest.setName("this is the test " + i);
-            indexTestMapper.insert(indexTest);
+//            indexTestMapper.insert(indexTest);
         }
     }
 

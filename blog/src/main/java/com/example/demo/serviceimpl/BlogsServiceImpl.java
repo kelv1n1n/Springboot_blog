@@ -9,6 +9,7 @@ import com.example.demo.service.BlogsService;
 import com.example.demo.util.MarkDownUtil;
 import com.example.demo.util.PageQueryUtil;
 import com.example.demo.util.PageResult;
+import com.example.demo.util.PatternUtil;
 import com.example.demo.vo.BlogDetailVO;
 import com.example.demo.vo.PersonalResult;
 import org.slf4j.Logger;
@@ -205,7 +206,6 @@ public class BlogsServiceImpl implements BlogsService {
     @Override
     public PageResult getAllBlog(PageQueryUtil pageQueryUtil) {
         List<Blog> blogList = blogMapper.findBlogList(pageQueryUtil);
-//        logger.info("查出来的博客列表：" + blogList.toString());
         int total = blogMapper.getTotalBlogs(pageQueryUtil);
         PageResult pageResult = new PageResult(blogList, total, pageQueryUtil.getLimit(), pageQueryUtil.getPage());
         return pageResult;
@@ -345,5 +345,32 @@ public class BlogsServiceImpl implements BlogsService {
     @Override
     public List<Blog> hotBlog() {
         return blogMapper.hotBlog();
+    }
+
+
+    /**
+     *首页搜索功能
+     * @return
+     */
+    @Override
+    public List<Blog> searchBlog(String keyword) {
+        //如果符合规则 就查数据库
+        if (PatternUtil.validKeyword(keyword)) {
+            BlogExample blogExample = new BlogExample();
+            blogExample.or().andBlogTitleLike('%'+keyword+'%');
+            blogExample.or().andBlogTagsLike('%'+keyword+'%');
+            blogExample.or().andBlogCategoryNameLike('%'+keyword+'%');
+            blogExample.setOrderByClause("create_time DESC");
+            List<Blog> blogList = blogMapper.selectByExampleWithBLOBs(blogExample);
+            List<Blog> newBlog = new ArrayList<>();
+            for (Blog blog : blogList){
+                if (blog.getIsDeleted() == 1){
+                    continue;
+                }
+                newBlog.add(blog);
+            }
+            return newBlog;
+        }
+        return new ArrayList<>();
     }
 }

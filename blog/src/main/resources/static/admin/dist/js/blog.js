@@ -79,6 +79,7 @@ function search() {
     $("#jqGrid").jqGrid("setGridParam", {url: '/admin/blog/list'}).trigger("reloadGrid");
 }
 
+
 /**
  * jqGrid重新加载
  */
