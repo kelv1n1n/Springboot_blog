@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 @SpringBootTest
 public class DemoApplicationTests {
 
@@ -71,7 +72,9 @@ public class DemoApplicationTests {
     }
 
 
-    /*新建索引*/
+    */
+/*新建索引*//*
+
     @Test
     public void testIndex() throws IOException {
 
@@ -111,7 +114,9 @@ public class DemoApplicationTests {
 
     }
 
-    /*mysql插入100条数据*/
+    */
+/*mysql插入100条数据*//*
+
     @Test
     public void mysqlTest(){
         IndexTest indexTest = null;
@@ -123,7 +128,9 @@ public class DemoApplicationTests {
         }
     }
 
-    /*mysql全文检索*/
+    */
+/*mysql全文检索*//*
+
     @Test
     public void mysqlSearch(){
         StopWatch watch = new StopWatch();
@@ -151,9 +158,11 @@ public class DemoApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * es 模糊检索
-     */
+     *//*
+
     public void searchShould(String index, String content) throws IOException {
         StopWatch watch = new StopWatch();
         watch.start();
@@ -187,12 +196,14 @@ public class DemoApplicationTests {
 //        }
     }
 
-    /**
+    */
+/**
      * 搜索
      * @param index 索引
      * @param name 搜索的内容
      * @throws IOException
-     */
+     *//*
+
     public void search(String index, String name) throws IOException {
         BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
         boolBuilder.must(QueryBuilders.matchQuery("name", name)); // 这里可以根据字段进行搜索，must表示符合条件的，相反的mustnot表示不符合条件的
@@ -213,10 +224,12 @@ public class DemoApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 批量操作
      * @throws IOException
-     */
+     *//*
+
     public void bulk() throws IOException {
         // 批量增加
         BulkRequest bulkAddRequest = new BulkRequest();
@@ -255,24 +268,28 @@ public class DemoApplicationTests {
 //        search(INDEX_TEST, "this");
     }
 
-    /**
+    */
+/**
      * 获取记录信息
      * @param index 索引
      * @param id 文档id
      * @throws IOException
-     */
+     *//*
+
     public void get(String index, Long id) throws IOException {
         GetRequest getRequest = new GetRequest(index, id.toString());
         GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
         System.out.println("get: " + JSON.toJSONString(getResponse));
     }
 
-    /**
+    */
+/**
      * 更新记录信息
      * @param index 索引
      * @param tests 对象
      * @throws IOException
-     */
+     *//*
+
     public void update(String index, EsTest tests) throws IOException {
         tests.setName(tests.getName() + "updated");
         UpdateRequest request = new UpdateRequest(index, tests.getId().toString());
@@ -281,24 +298,28 @@ public class DemoApplicationTests {
         System.out.println("update: " + JSON.toJSONString(updateResponse));
     }
 
-    /**
+    */
+/**
      * 删除记录
      * @param index 索引
      * @param id 文档id
      * @throws IOException
-     */
+     *//*
+
     public void delete(String index, Long id) throws IOException {
         DeleteRequest deleteRequest = new DeleteRequest(index, id.toString());
         DeleteResponse response = client.delete(deleteRequest, RequestOptions.DEFAULT);
         System.out.println("delete: " + JSON.toJSONString(response));
     }
 
-    /**
+    */
+/**
      * 增加记录
      * @param index 索引
      * @param tests 对象
      * @throws IOException
-     */
+     *//*
+
     public void add(String index, EsTest tests) throws IOException {
         IndexRequest indexRequest = new IndexRequest(index).id(tests.getId().toString());
         indexRequest.source(JSON.toJSONString(tests), XContentType.JSON);
@@ -306,13 +327,15 @@ public class DemoApplicationTests {
         System.out.println("add: " + JSON.toJSONString(indexResponse));
     }
 
-    /**
+    */
+/**
      * 判断记录是都存在
      * @param index 索引
      * @param tests 对象
      * @return
      * @throws IOException
-     */
+     *//*
+
     public boolean exists(String index, EsTest tests) throws IOException {
         GetRequest getRequest = new GetRequest(index, tests.getId().toString());
         getRequest.fetchSourceContext(new FetchSourceContext(false));
@@ -322,11 +345,13 @@ public class DemoApplicationTests {
         return exists;
     }
 
-    /**
+    */
+/**
      * 创建索引
      * @param index 索引
      * @throws IOException
-     */
+     *//*
+
     private void createIndex(String index) throws IOException {
         CreateIndexRequest request = new CreateIndexRequest(index);
         CreateIndexResponse createIndexResponse = client.indices().create(request, RequestOptions.DEFAULT);
@@ -334,11 +359,13 @@ public class DemoApplicationTests {
     }
 
 
-    /**
+    */
+/**
      * 判断索引是否存在
      * @param index 索引
      * @throws IOException
-     */
+     *//*
+
     private boolean existsIndex(String index) throws IOException {
         GetIndexRequest request = new GetIndexRequest();
         request.indices(index);
@@ -346,4 +373,4 @@ public class DemoApplicationTests {
         System.out.println("existsIndex: " + exists);
         return exists;
     }
-}
+}*/
